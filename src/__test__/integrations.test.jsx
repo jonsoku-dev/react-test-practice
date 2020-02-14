@@ -27,6 +27,9 @@ it('can fetch a list of comments and display them', () => {
   // find the 'fetchComments' button and click it
   wrapped.find('.fetch-comments').simulate('click');
 
-  // Expect to find a list of comments
-  expect(wrapped.find('li').length).toEqual(500);
+  // 클릭하고 좀 기다릴 시간을 줘야한다...
+  setTimeout(() => {
+    // Expect to find a list of comments
+    expect(wrapped.find('li').length).toEqual(500);
+  }, 100);
 });
