@@ -21,3 +21,8 @@ it('creates one LI per comment', () => {
   // console.log(wrapped.find('li').length);
   expect(wrapped.find('li').length).toEqual(2); // initialState의 길이 2가 나온다.
 });
+
+it('shows the text for each comment', () => {
+  expect(wrapped.render().text()).toContain('Comment 1');
+  expect(wrapped.render().text()).toContain('Comment 2');
+});
