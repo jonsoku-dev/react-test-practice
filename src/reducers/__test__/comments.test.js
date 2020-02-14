@@ -11,3 +11,9 @@ it('handles actions of type SAVE_COMMENT', () => {
 
   expect(newState).toEqual(['New Comment'])
 })
+
+it('이상한 타입이 들어왔을 때', () => {
+  const newState = commentsReducer([], { type: 'aLADFJKLSDFLKJDF' })
+
+  expect(newState).toEqual([])
+})
