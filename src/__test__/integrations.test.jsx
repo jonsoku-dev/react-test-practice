@@ -28,12 +28,12 @@ it('can fetch a list of comments and display them', done => {
   wrapped.find('.fetch-comments').simulate('click');
 
   // 클릭하고 좀 기다릴 시간을 줘야한다...
-  setTimeout(() => {
+  moxios.wait(() => {
     wrapped.update();
     // Expect to find a list of comments
     expect(wrapped.find('li').length).toEqual(2);
 
     done();
     wrapped.unmount();
-  }, 1000);
+  });
 });
