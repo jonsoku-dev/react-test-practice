@@ -2,6 +2,10 @@ import React from 'react'
 import { mount } from 'enzyme'
 import CommentBox from '../CommentBox'
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducers from '../../reducers'
+
 // 아래 명령을 실행하여 length를 출력 할 수 있다.
 // console.log(wrapped.find('textarea').length)
 
@@ -9,7 +13,11 @@ let wrapped
 
 // 1
 beforeEach(() => {
-  wrapped = mount(<CommentBox />)
+  wrapped = mount(
+    <Provider store={createStore(reducers, {})}>
+      <CommentBox />
+    </Provider>,
+  )
 })
 
 // 3
