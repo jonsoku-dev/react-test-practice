@@ -18,6 +18,15 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if (err) {
+      return callback(err);
+    }
+    callback(null, isMatch);
+  });
+};
+
 // 모델 클래스 생성
 const model = mongoose.model("user", userSchema);
 

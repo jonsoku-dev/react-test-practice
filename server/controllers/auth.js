@@ -7,6 +7,11 @@ const tokenForUser = user => {
   });
 };
 
+exports.signin = (req, res, next) => {
+  // passport미들웨어를 통과하였으므로, req.user
+  res.send({ success: true, token: tokenForUser(req.user) });
+};
+
 exports.signup = async (req, res, next) => {
   try {
     const email = req.body.email;
