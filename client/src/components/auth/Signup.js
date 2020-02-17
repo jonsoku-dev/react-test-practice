@@ -30,15 +30,19 @@ class Signup extends Component {
             autoComplete="none"
           />
         </fieldset>
+        <div>{this.props.errorMessage}</div>
         <button>Sign Up!</button>
       </form>
     );
   }
 }
 
-// compose 여러개의 HOC를 씌워줄때 유용하다.
+const mapStateToProps = ({ auth }) => {
+  return { errorMessage: auth.errorMessage };
+};
 
+// compose 여러개의 HOC를 씌워줄때 유용하다.
 export default compose(
-  connect(null, actions),
+  connect(mapStateToProps, actions),
   reduxForm({ form: "signup" })
 )(Signup);
