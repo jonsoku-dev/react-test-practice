@@ -8,13 +8,13 @@ export function saveComment(comment) {
   };
 }
 
-export function fetchComments() {
+export const fetchComments = () => {
   const response = axios.get('https://jsonplaceholder.typicode.com/comments');
   return {
     type: FETCH_COMMENTS,
     payload: response,
   };
-}
+};
 
 export function changeAuth(isLoggedIn) {
   return {

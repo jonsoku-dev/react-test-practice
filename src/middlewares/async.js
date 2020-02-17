@@ -1,12 +1,9 @@
-export default ({ dispatch }) => next => async action => {
+export default ({ dispatch, getState }) => next => action => {
   if (!action.payload || !action.payload.then) {
     return next(action);
   }
-  try {
-    const response = await action.payload;
+  action.payload.then(response => {
     const newAction = { ...action, payload: response };
     dispatch(newAction);
-  } catch (err) {
-    console.error(err);
-  }
+  });
 };
