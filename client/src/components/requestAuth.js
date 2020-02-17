@@ -1,26 +1,22 @@
-import React, { Component } from "react";
+import React, { useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 export default ChildComponent => {
-  class ComposedComponent extends Component {
-    // Our component just got rendered
-    componentDidMount() {
-      this.shouldNavigateAway();
-    }
-    // Our component just got updated
-    componentDidUpdate() {
-      this.shouldNavigateAway();
-    }
-    shouldNavigateAway() {
-      if (!this.props.auth) {
-        this.props.history.push("/");
+  const ComposedComponent = ({ auth, history, ...props }) => {
+    const shouldNavigateAway = useCallback(() => {
+      if (!auth) {
+        history.push("/");
       }
-    }
-    render() {
-      return <ChildComponent {...this.props} />;
-    }
-  }
-  function mapStateToProps(state) {
-    return { auth: state.auth.authenticated };
-  }
+    }, [auth, history]);
+    useEffect(() => {
+      shouldNavigateAway();
+      return () => {};
+    }, [shouldNavigateAway]);
+
+    return <ChildComponent {...props} />;
+  };
+  const mapStateToProps = ({ auth }) => ({
+    auth: auth.authenticated
+  });
+
   return connect(mapStateToProps)(ComposedComponent);
 };
