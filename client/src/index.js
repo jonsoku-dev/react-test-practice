@@ -13,6 +13,7 @@ import App from "./components/App";
 import Welcome from "./components/Welcome";
 import Feature from "./components/Feature";
 import Signup from "./components/auth/Signup";
+import Signin from "./components/auth/Signin";
 import Signout from "./components/auth/Signout";
 
 const middlewares = [reduxThunk];
@@ -29,10 +30,11 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <App>
-        <Route path="/" component={Welcome} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/feature" component={Feature} />
-        <Route path="/signout" component={Signout} />
+        <Route exact path="/" component={Welcome} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signin" component={Signin} />
+        <Route exact path="/signout" component={Signout} />
+        <Route exact path="/feature" component={Feature} />
       </App>
     </BrowserRouter>
   </Provider>,
