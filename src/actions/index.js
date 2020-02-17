@@ -8,16 +8,12 @@ export function saveComment(comment) {
   };
 }
 
-export async function fetchComments() {
-  try {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/comments');
-    return {
-      type: FETCH_COMMENTS,
-      payload: response,
-    };
-  } catch (err) {
-    console.error(err);
-  }
+export function fetchComments() {
+  const response = axios.get('https://jsonplaceholder.typicode.com/comments');
+  return {
+    type: FETCH_COMMENTS,
+    payload: response,
+  };
 }
 
 export function changeAuth(isLoggedIn) {
