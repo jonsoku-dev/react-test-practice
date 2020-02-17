@@ -8,7 +8,7 @@ const userSchema = new Schema({
   password: String
 });
 
-// On Save Hook, encrypt password (패스워드 암호화 훅)
+//! On Save Hook, encrypt password (패스워드 암호화 훅)
 userSchema.pre("save", async function(next) {
   if (!this.isModified("password")) {
     next();

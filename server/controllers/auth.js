@@ -1,4 +1,11 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+
+const tokenForUser = user => {
+  return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE
+  });
+};
 
 exports.signup = async (req, res, next) => {
   try {
@@ -30,7 +37,7 @@ exports.signup = async (req, res, next) => {
     const user = await newUser.save();
 
     // Repond to request indicating the user was created
-    res.status(201).json({ success: true, data: user });
+    res.status(201).json({ success: true, token: tokenForUser(user) });
   } catch (err) {
     console.error(err);
   }
