@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import * as actions from "../../actions";
 
 class Signup extends Component {
   onSubmit = formProps => {
-    console.log(formProps);
+    this.props.signup(formProps);
   };
   render() {
     const { handleSubmit } = this.props;
@@ -33,4 +36,9 @@ class Signup extends Component {
   }
 }
 
-export default reduxForm({ form: "signup" })(Signup);
+// compose 여러개의 HOC를 씌워줄때 유용하다.
+
+export default compose(
+  connect(null, actions),
+  reduxForm({ form: "signup" })
+)(Signup);
