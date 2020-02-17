@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "./config/config.env" });
 const express = require("express");
+const cors = require("cors");
 const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -12,6 +13,7 @@ mongoDB();
 
 // App setup
 app.use(morgan("combined"));
+app.use(cors());
 app.use(bodyParser.json({ type: "*/*" }));
 router(app);
 
