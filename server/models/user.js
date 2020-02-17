@@ -1,10 +1,21 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const Schema = mongoose.Schema;
 
 // 모델 정의
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String
+});
+
+// On Save Hook, encrypt password (패스워드 암호화 훅)
+userSchema.pre("save", async function(next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
 // 모델 클래스 생성
