@@ -1,9 +1,14 @@
+require("dotenv").config({ path: "./config/config.env" });
 const express = require("express");
 const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
 const router = require("./router");
+const mongoDB = require("./config/mongoDB");
+
+// DB Connect
+mongoDB();
 
 // App setup
 app.use(morgan("combined"));
