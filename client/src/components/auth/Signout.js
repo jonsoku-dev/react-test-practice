@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
 
-class Signout extends Component {
-  componentDidMount() {
-    this.props.signout();
-  }
+const Signout = ({ signout }) => {
+  useEffect(() => {
+    signout();
+  }, [signout]);
 
-  render() {
-    return <div>Sorry to see you go </div>;
-  }
-}
+  return <div> 로그아웃 처리 되었습니다. </div>;
+};
 
 export default connect(null, actions)(Signout);

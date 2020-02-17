@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./HeaderStyle.css";
 
-class Header extends Component {
-  renderLinks() {
-    if (this.props.authenticated) {
+const Header = ({ authenticated }) => {
+  const renderLinks = () => {
+    if (authenticated) {
       return (
         <div>
           <Link to="/signout">Sign out</Link>
@@ -20,16 +20,14 @@ class Header extends Component {
         </div>
       );
     }
-  }
-  render() {
-    return (
-      <div className="header">
-        <Link to="/">Redux Auth</Link>
-        {this.renderLinks()}
-      </div>
-    );
-  }
-}
+  };
+  return (
+    <div className="header">
+      <Link to="/">Redux Auth</Link>
+      {renderLinks()}
+    </div>
+  );
+};
 
 const mapStateToProps = ({ auth }) => ({
   authenticated: auth.authenticated
